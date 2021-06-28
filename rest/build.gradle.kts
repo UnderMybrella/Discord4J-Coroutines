@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
 }
+apply(plugin = "maven-publish")
 
 version = "1.0.0"
 
@@ -27,4 +28,10 @@ tasks.test {
 
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+configure<PublishingExtension> {
+    repositories {
+        maven(url = "${rootProject.buildDir}/repo")
+    }
 }
