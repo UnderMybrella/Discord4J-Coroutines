@@ -5,6 +5,7 @@ plugins {
 }
 apply(plugin = "maven-publish")
 
+group = "dev.brella"
 version = "1.2.0"
 
 val coroutines_version: String by project
