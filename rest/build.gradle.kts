@@ -5,7 +5,7 @@ plugins {
 }
 apply(plugin = "maven-publish")
 
-version = "1.0.0"
+version = "1.1.0"
 
 val coroutines_version: String by project
 val d4j_version: String by project
