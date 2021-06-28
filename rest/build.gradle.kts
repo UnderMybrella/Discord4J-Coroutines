@@ -35,3 +35,21 @@ configure<PublishingExtension> {
         maven(url = "${rootProject.buildDir}/repo")
     }
 }
+
+val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allSource)
+}
+
+configure<PublishingExtension> {
+    repositories {
+        maven(url = "${rootProject.buildDir}/repo")
+    }
+
+    publications {
+        register("maven", MavenPublication::class) {
+            from(components["kotlin"])
+            artifact(sourcesJar)
+        }
+    }
+}
