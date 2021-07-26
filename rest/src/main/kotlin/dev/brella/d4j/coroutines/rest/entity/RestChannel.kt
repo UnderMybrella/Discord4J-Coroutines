@@ -33,7 +33,7 @@ public inline fun RestChannel.messagesAfterFlow(messageId: Snowflake) = getMessa
 
 public suspend inline fun RestChannel.awaitCreateMessage(request: MessageCreateRequest) = createMessage(request).await()
 public suspend inline fun RestChannel.awaitCreateMessage(builder: ImmutableMessageCreateRequest.Builder.() -> Unit) = awaitCreateMessage(buildMessageCreateRequest(builder))
-public suspend inline fun RestChannel.awaitCreateMessage(request: MultipartRequest) = createMessage(request).await()
+public suspend inline fun RestChannel.awaitCreateMessage(request: MultipartRequest<MessageCreateRequest>) = createMessage(request).await()
 public suspend inline fun RestChannel.awaitCreateMessage(content: String) = createMessage(content).await()
 public suspend inline fun RestChannel.awaitCreateMessage(embed: EmbedData) = createMessage(embed).await()
 public suspend inline fun RestChannel.awaitCreateEmbed(builder: ImmutableEmbedData.Builder.() -> Unit) = awaitCreateMessage(buildEmbedData(builder))

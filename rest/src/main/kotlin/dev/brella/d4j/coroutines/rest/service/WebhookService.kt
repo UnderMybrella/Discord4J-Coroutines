@@ -10,12 +10,12 @@ import discord4j.discordjson.json.ImmutableWebhookCreateRequest
 import discord4j.discordjson.json.ImmutableWebhookExecuteRequest
 import discord4j.discordjson.json.ImmutableWebhookMessageEditRequest
 import discord4j.discordjson.json.ImmutableWebhookModifyRequest
-import discord4j.discordjson.json.MessageData
 import discord4j.discordjson.json.WebhookCreateRequest
+import discord4j.discordjson.json.WebhookExecuteRequest
 import discord4j.discordjson.json.WebhookMessageEditRequest
 import discord4j.discordjson.json.WebhookModifyRequest
 import discord4j.rest.service.WebhookService
-import discord4j.rest.util.WebhookMultipartRequest
+import discord4j.rest.util.MultipartRequest
 import kotlinx.coroutines.reactive.asFlow
 
 public suspend inline fun WebhookService.awaitCreateWebhook(channelId: Long, request: WebhookCreateRequest, reason: String? = null) =
@@ -36,14 +36,14 @@ public suspend inline fun WebhookService.awaitModifyWebhook(webhookId: Long, rea
 public suspend inline fun WebhookService.awaitDeleteWebhook(webhookId: Long, reason: String? = null) = deleteWebhook(webhookId, reason).awaitNone()
 public suspend inline fun WebhookService.awaitDeleteWebhookMessage(webhookId: Long, token: String, messageId: String) = deleteWebhookMessage(webhookId, token, messageId).awaitNone()
 
-public suspend inline fun WebhookService.awaitExecuteWebhook(webhookId: Long, token: String, wait: Boolean = true, request: WebhookMultipartRequest) = executeWebhook(webhookId, token, wait, request).await()
+public suspend inline fun WebhookService.awaitExecuteWebhook(webhookId: Long, token: String, wait: Boolean = true, request: MultipartRequest<WebhookExecuteRequest>) = executeWebhook(webhookId, token, wait, request).await()
 public suspend inline fun WebhookService.awaitExecuteWebhook(webhookId: Long, token: String, wait: Boolean = true, builder: ImmutableWebhookExecuteRequest.Builder.() -> Unit) =
-    awaitExecuteWebhook(webhookId, token, wait, WebhookMultipartRequest(buildWebhookExecuteRequest(builder)))
+    awaitExecuteWebhook(webhookId, token, wait, MultipartRequest.ofRequest(buildWebhookExecuteRequest(builder)))
 
 public inline fun String.getWebhookIdFromUrl() = substringBeforeLast('/').substringAfterLast('/').toULong().toLong()
 public inline fun String.getWebhookTokenFromUrl() = substringAfterLast('/')
 
-public suspend inline fun WebhookService.awaitExecuteWebhook(webhookUrl: String, wait: Boolean = true, request: WebhookMultipartRequest) =
+public suspend inline fun WebhookService.awaitExecuteWebhook(webhookUrl: String, wait: Boolean = true, request: MultipartRequest<WebhookExecuteRequest>) =
     awaitExecuteWebhook(webhookUrl.getWebhookIdFromUrl(), webhookUrl.getWebhookTokenFromUrl(), wait, request)
 
 public suspend inline fun WebhookService.awaitExecuteWebhook(webhookUrl: String, wait: Boolean = true, builder: ImmutableWebhookExecuteRequest.Builder.() -> Unit) =

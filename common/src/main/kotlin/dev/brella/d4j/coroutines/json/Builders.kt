@@ -344,11 +344,11 @@ public inline fun buildUnavailableGuildCreateData(builder: ImmutableUnavailableG
 public inline fun buildUnavailableGuildData(builder: ImmutableUnavailableGuildData.Builder.() -> Unit): UnavailableGuildData =
     ImmutableUnavailableGuildData.builder().apply(builder).build()
 
-public inline fun buildUpdateOthersVoiceStateRequest(builder: ImmutableUpdateOthersVoiceStateRequest.Builder.() -> Unit): UpdateOthersVoiceStateRequest =
-    ImmutableUpdateOthersVoiceStateRequest.builder().apply(builder).build()
+public inline fun buildUpdateUserVoiceStateRequest(builder: ImmutableUpdateUserVoiceStateRequest.Builder.() -> Unit): UpdateUserVoiceStateRequest =
+    ImmutableUpdateUserVoiceStateRequest.builder().apply(builder).build()
 
-public inline fun buildUpdateSelfVoiceStateRequest(builder: ImmutableUpdateSelfVoiceStateRequest.Builder.() -> Unit): UpdateSelfVoiceStateRequest =
-    ImmutableUpdateSelfVoiceStateRequest.builder().apply(builder).build()
+public inline fun buildUpdateCurrentUserVoiceStateRequest(builder: ImmutableUpdateCurrentUserVoiceStateRequest.Builder.() -> Unit): UpdateCurrentUserVoiceStateRequest =
+    ImmutableUpdateCurrentUserVoiceStateRequest.builder().apply(builder).build()
 
 public inline fun buildUserData(builder: ImmutableUserData.Builder.() -> Unit): UserData =
     ImmutableUserData.builder().apply(builder).build()
